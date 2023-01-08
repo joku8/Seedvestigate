@@ -11,14 +11,19 @@
 		5E40E726296633AF00B4EB6E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E40E725296633AF00B4EB6E /* ContentView.swift */; };
 		5E40E728296633B200B4EB6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E40E727296633B200B4EB6E /* Assets.xcassets */; };
 		5E40E72B296633B200B4EB6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E40E72A296633B200B4EB6E /* Preview Assets.xcassets */; };
+		5EE5969B29667B93009A0803 /* SeedLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE5969A29667B93009A0803 /* SeedLookup.swift */; };
+		5EE5969D2966871A009A0803 /* SeedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE5969C2966871A009A0803 /* SeedStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E1E3BA2296767ED0061EFBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E40E720296633AF00B4EB6E /* Seedvestigate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seedvestigate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E40E723296633AF00B4EB6E /* SeedvestigateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedvestigateApp.swift; sourceTree = "<group>"; };
 		5E40E725296633AF00B4EB6E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5E40E727296633B200B4EB6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E40E72A296633B200B4EB6E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5EE5969A29667B93009A0803 /* SeedLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedLookup.swift; sourceTree = "<group>"; };
+		5EE5969C2966871A009A0803 /* SeedStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +58,10 @@
 			children = (
 				5E40E723296633AF00B4EB6E /* SeedvestigateApp.swift */,
 				5E40E725296633AF00B4EB6E /* ContentView.swift */,
+				5EE5969A29667B93009A0803 /* SeedLookup.swift */,
+				5EE5969C2966871A009A0803 /* SeedStorage.swift */,
 				5E40E727296633B200B4EB6E /* Assets.xcassets */,
+				5E1E3BA2296767ED0061EFBE /* Info.plist */,
 				5E40E729296633B200B4EB6E /* Preview Content */,
 			);
 			path = Seedvestigate;
@@ -99,6 +107,7 @@
 				TargetAttributes = {
 					5E40E71F296633AF00B4EB6E = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 					};
 				};
 			};
@@ -139,6 +148,8 @@
 			files = (
 				5E40E726296633AF00B4EB6E /* ContentView.swift in Sources */,
 				5E40E724296633AF00B4EB6E /* SeedvestigateApp.swift in Sources */,
+				5EE5969D2966871A009A0803 /* SeedStorage.swift in Sources */,
+				5EE5969B29667B93009A0803 /* SeedLookup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,17 +275,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Seedvestigate/Preview Content\"";
 				DEVELOPMENT_TEAM = J2LQ4L9VCK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Seedvestigate/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera usage description";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -283,6 +297,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.josephku.Seedvestigate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -293,17 +308,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Seedvestigate/Preview Content\"";
 				DEVELOPMENT_TEAM = J2LQ4L9VCK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Seedvestigate/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera usage description";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

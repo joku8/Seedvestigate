@@ -9,13 +9,43 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView{
+            VStack {
+                Image("seed")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 200, height: 150)
+                Text("Seedvestigate")
+                    .font(.title)
+                    .fontWeight(.thin)
+                Spacer()
+                Spacer()
+                NavigationLink(destination: SeedLookup()) {
+                    Image(systemName: "camera")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 70, height: 70)
+                }
+                .frame(height: 100)
+                Text("Seed Packet Lookup")
+                    .font(.title2)
+                    .fontWeight(.regular)
+                    .foregroundColor(Color.gray)
+                Spacer()
+                NavigationLink(destination: SeedStorage()) {
+                    Image(systemName: "list.bullet.rectangle")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 70, height: 70)
+                }
+                Text("Saved Seed Packets")
+                    .font(.title2)
+                    .fontWeight(.regular)
+                    .foregroundColor(Color.gray)
+                Spacer()
+            }
         }
-        .padding()
+        
     }
 }
 
