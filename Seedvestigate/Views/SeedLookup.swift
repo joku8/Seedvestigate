@@ -14,9 +14,19 @@ struct SeedLookup: View {
     @State private var isShownCamera: Bool = false
     @State private var isShownSeed: Bool = false
     
+    @State private var showCheckmark: Bool = false
+    
     @State private var ui_image: UIImage?
     
     @State private var sourceType: UIImagePickerController.SourceType = .camera
+    
+    @State private var value: String = ""
+    var placeholder = "Select Seed Supplier"
+    var dropDownList = ["MIgardener", "Baker Creek Heirloom Seeds"]
+    
+//    Image(systemName:  "checkmark.circle")
+//        .foregroundColor(Color.gray)
+//        .font(Font.system(size: 20, weight: .bold))
     
     var body: some View {
         
@@ -27,6 +37,38 @@ struct SeedLookup: View {
             } else {
                 Image("grayscaleseed").resizable().aspectRatio(contentMode: .fit).frame(width: 400, height: 400)
             }
+            Menu {
+                ForEach(dropDownList, id: \.self){ client in
+                            Button(client) {
+                                self.value = client
+                            }
+                        }
+                    } label: {
+                        VStack(spacing: 5){
+                            HStack{
+                                Spacer()
+                                    .frame(width: 20)
+                                Text(value.isEmpty ? placeholder : value)
+                                    .font(.headline)
+                                    .fontWeight(.light)
+                                    .foregroundColor(value.isEmpty ? .gray : .black)
+                                Spacer()
+                                Image(systemName: showCheckmark ? "checkmark.circle.fill" : "checkmark.circle")
+                                    .foregroundColor(showCheckmark ? .green : .gray)
+                                    .font(Font.system(size: 20, weight: .bold))
+                                Spacer()
+                                    .frame(width: 20)
+                            }
+                            .onChange(of: value) { value in
+                                self.showCheckmark = !value.isEmpty
+                                print("HELLOOO")
+                                print(showCheckmark)
+                            }
+                        }
+                        .frame(width: 350, height: 50)
+                        .background(showCheckmark ? Color(red: 220 / 255, green: 255 / 255, blue: 212 / 255) : Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
+                        .cornerRadius(20)
+                    }
             Spacer()
             Button(action: {
                 self.isShownSeed.toggle()
@@ -57,10 +99,12 @@ struct SeedLookup: View {
             A(isShown: self.$isShownCamera, myimage: self.$ui_image, mysourceType: self.$sourceType)
         }
         .sheet(isPresented: $isShownSeed) {
-            if ui_image != nil {
-                seedPacketInfo(ui_image: $ui_image)
-            } else {
+            if ui_image == nil {
                 pictureRequired()
+            } else if (value.isEmpty){
+                supplierRequired()
+            } else {
+                seedPacketInfo(ui_image: $ui_image, supplier: $value)
             }
         }
     }
@@ -129,16 +173,30 @@ struct pictureRequired: View{
     }
 }
 
+struct supplierRequired: View{
+    var body: some View{
+        VStack{
+            Image(systemName: "leaf.circle")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 50, height: 50)
+            Text("Please select a seed supplier")
+                .font(.title)
+                .fontWeight(.light)
+                .foregroundColor(Color.green)
+        }
+    }
+}
+
 struct seedPacketInfo: View{
     @Binding var ui_image: UIImage?
+    @Binding var supplier: String
     
     @State var recognizedText: String = ""
     
-    
-    
     var body: some View{
         VStack{
-            Text("Needs to be filled with seed info")
+            Text(recognizedText)
         }.onAppear {
             self.recognizedText = ""
             self.recognizeText(image: self.ui_image)

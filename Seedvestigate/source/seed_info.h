@@ -10,14 +10,14 @@ extern "C"
 {
 #endif
 
-const char* test();
-const char* parseData(const char* data);
-
-struct {
+struct seedpacket{
     const char* company;
-    const char* crop;
+    const char* plant;
     const char* variety;
 } seedpacket;
+
+const char* parseData(const char* data, const char* supplier);
+
 
 #ifdef __cplusplus
 }

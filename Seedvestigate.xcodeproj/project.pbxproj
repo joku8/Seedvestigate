@@ -12,8 +12,6 @@
 		5E40E728296633B200B4EB6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E40E727296633B200B4EB6E /* Assets.xcassets */; };
 		5E40E72B296633B200B4EB6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E40E72A296633B200B4EB6E /* Preview Assets.xcassets */; };
 		5E991EB2296A569300B77EAB /* seed_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E991EB0296A569300B77EAB /* seed_info.cpp */; };
-		5E991EB7296AB20400B77EAB /* companies.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E991EB6296AB20400B77EAB /* companies.strings */; };
-		5E991EB9296AB22600B77EAB /* plants.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E991EB8296AB22600B77EAB /* plants.strings */; };
 		5EE5969B29667B93009A0803 /* SeedLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE5969A29667B93009A0803 /* SeedLookup.swift */; };
 		5EE5969D2966871A009A0803 /* SeedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE5969C2966871A009A0803 /* SeedStorage.swift */; };
 /* End PBXBuildFile section */
@@ -28,8 +26,6 @@
 		5E991EAF296A569300B77EAB /* Seedvestigate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Seedvestigate-Bridging-Header.h"; sourceTree = "<group>"; };
 		5E991EB0296A569300B77EAB /* seed_info.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = seed_info.cpp; sourceTree = "<group>"; };
 		5E991EB1296A569300B77EAB /* seed_info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = seed_info.h; sourceTree = "<group>"; };
-		5E991EB6296AB20400B77EAB /* companies.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = companies.strings; sourceTree = "<group>"; };
-		5E991EB8296AB22600B77EAB /* plants.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = plants.strings; sourceTree = "<group>"; };
 		5EE5969A29667B93009A0803 /* SeedLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedLookup.swift; sourceTree = "<group>"; };
 		5EE5969C2966871A009A0803 /* SeedStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,7 +60,7 @@
 		5E40E722296633AF00B4EB6E /* Seedvestigate */ = {
 			isa = PBXGroup;
 			children = (
-				5E991EAB296A51D600B77EAB /* Source */,
+				5E991EAB296A51D600B77EAB /* source */,
 				5E991EA9296A519F00B77EAB /* Views */,
 				5E40E727296633B200B4EB6E /* Assets.xcassets */,
 				5E1E3BA2296767ED0061EFBE /* Info.plist */,
@@ -92,24 +88,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		5E991EAB296A51D600B77EAB /* Source */ = {
+		5E991EAB296A51D600B77EAB /* source */ = {
 			isa = PBXGroup;
 			children = (
-				5E991EB3296AB15700B77EAB /* Data */,
 				5E991EB0296A569300B77EAB /* seed_info.cpp */,
 				5E991EB1296A569300B77EAB /* seed_info.h */,
 				5E991EAF296A569300B77EAB /* Seedvestigate-Bridging-Header.h */,
 			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		5E991EB3296AB15700B77EAB /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				5E991EB6296AB20400B77EAB /* companies.strings */,
-				5E991EB8296AB22600B77EAB /* plants.strings */,
-			);
-			path = Data;
+			path = source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,8 +157,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E991EB9296AB22600B77EAB /* plants.strings in Resources */,
-				5E991EB7296AB20400B77EAB /* companies.strings in Resources */,
 				5E40E72B296633B200B4EB6E /* Preview Assets.xcassets in Resources */,
 				5E40E728296633B200B4EB6E /* Assets.xcassets in Resources */,
 			);
