@@ -1,7 +1,7 @@
 # Seedvestigate
 Seedvestigate is a simple iOS app that allows users to take a picture of a seed packet and look up information about the seed (how to grow it, where to get more info, etc). The app uses image recognition to identify the seed packet and match it with a supplier from a list of seed suppliers, which allows for more accurate processing of seed packet image data. The user can also save their seed packets for future reference or seed packet inventory records – a common task all gardeners do, and one that would benefit from automation.
 
-<img src="[https://your-image-url.type](https://github.com/joku8/Seedvestigate/blob/3d79ee89aad7e59058842ce7c3730d152b43eae7/images/Seedvestivate_startup.PNG)" width="207" height="448">
+<img src="https://github.com/joku8/Seedvestigate/blob/3d79ee89aad7e59058842ce7c3730d152b43eae7/images/Seedvestivate_startup.PNG" width="207" height="448">
 
 ## Features
 * Take a picture of the seed packet
