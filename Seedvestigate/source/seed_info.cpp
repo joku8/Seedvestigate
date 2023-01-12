@@ -15,16 +15,18 @@
 #include <filesystem>
 #include <algorithm>
 #include <cstring>
+#include <stdexcept>
 
 using namespace std;
 namespace fs = std::filesystem;
 
-vector<string> companies_list() {
-    vector<string> list_ = {
-        "migardener",
-        "baker creek",
-    };
-    return list_;
+string seedPacketToJson(seedpacket packet) {
+    std::string json_str = "{";
+    json_str += "\"company\":\"" + std::string(packet.company) + "\",";
+    json_str += "\"plant\":\"" + std::string(packet.plant) + "\",";
+    json_str += "\"variety\":\"" + std::string(packet.variety) + "\"";
+    json_str += "}";
+    return json_str;
 }
 
 vector<string> plants_list() {
@@ -80,20 +82,35 @@ string closest_match(string target, vector<string> options) {
     return closestMatch;
 }
 
-const char* parseData(const char* data, const char* supplier) {
-    vector<string> companies = companies_list();
-    vector<string> plants = plants_list();
+seedpacket parseData(const char* data, const char* supplier) {
     
-    struct seedpacket p;
-    
-    string company_closest_match = closest_match(data, companies);
-    p.company = company_closest_match.c_str();
-    
-    string plant_closest_match = closest_match(data, plants);
-    p.plant = plant_closest_match.c_str();
-    
-    cout << "company closest match is: " << p.company << endl;
-    cout << "plant closest match is: " << p.plant << endl;
+    cout << "supplier is " << supplier << endl;
         
-    return data;
+    if (strcmp(supplier, "Baker Creek Heirloom Seeds")) {
+        
+        
+        
+    } else if (strcmp(supplier, "MIgardener")) {
+        
+        
+        
+    }
+        
+    seedpacket default_ = {"--", "--", "--"};
+
+    return default_;
 }
+
+//seedpacket* baker_creek_seeds(const char* data) {
+//    
+//    printf("Processing seed packet as Baker Creek");
+//    
+//    return seedpacket;
+//}
+//
+//seedpacket* migardener_seeds(const char* data) {
+//    
+//    printf("Processing seed packet as MIgardener");
+//    
+//    return seedpacket;
+//}

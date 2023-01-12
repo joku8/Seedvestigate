@@ -24,10 +24,6 @@ struct SeedLookup: View {
     var placeholder = "Select Seed Supplier"
     var dropDownList = ["MIgardener", "Baker Creek Heirloom Seeds"]
     
-//    Image(systemName:  "checkmark.circle")
-//        .foregroundColor(Color.gray)
-//        .font(Font.system(size: 20, weight: .bold))
-    
     var body: some View {
         
         VStack{
@@ -61,8 +57,6 @@ struct SeedLookup: View {
                             }
                             .onChange(of: value) { value in
                                 self.showCheckmark = !value.isEmpty
-                                print("HELLOOO")
-                                print(showCheckmark)
                             }
                         }
                         .frame(width: 350, height: 50)
@@ -194,13 +188,13 @@ struct seedPacketInfo: View{
     
     @State var recognizedText: String = ""
     
+
     var body: some View{
         VStack{
             Text(recognizedText)
         }.onAppear {
             self.recognizedText = ""
             self.recognizeText(image: self.ui_image)
-            parseData(recognizedText)
         }
     }
     
