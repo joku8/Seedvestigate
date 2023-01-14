@@ -201,48 +201,73 @@ struct seedPacketInfo: View{
 
 
     var body: some View{
-        VStack{
-            let comp = seed_packet?.company ?? ""
-            let plnt = seed_packet?.plant ?? ""
-            let vrty = seed_packet?.variety ?? ""
-            HStack{
+        NavigationView{
+            VStack{
+                let comp = seed_packet?.company ?? ""
+                let plnt = seed_packet?.plant ?? ""
+                let vrty = seed_packet?.variety ?? ""
+                HStack{
+                    Spacer()
+                        .frame(width: 10)
+                    Text(plnt)
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
+                    Spacer()
+                }
+                HStack{
+                    Spacer()
+                        .frame(width: 10)
+                    Text(vrty)
+                        .font(.title2)
+                        .fontWeight(.thin)
+                        .italic()
+                    Spacer()
+                }
+                HStack{
+                    Spacer()
+                        .frame(width: 10)
+                    Text(comp)
+                        .font(.subheadline)
+                        .fontWeight(.ultraLight)
+                    Spacer()
+                }
                 Spacer()
-                    .frame(width: 10)
-                Text(plnt)
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
+                HStack{
+                    Spacer()
+                        .frame(width: 35)
+                    NavigationLink(destination: Troubleshoot()) {
+                        Image(systemName: "questionmark.circle")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 30, height: 30)
+                    }
+                    Spacer()
+                    Button(action: {
+                        // Add this to a database of seed packets
+                    }) {
+                        HStack{                            Image(systemName: "square.and.arrow.down")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 30, height: 30)
+                        }
+                    }
+                    Spacer()
+                        .frame(width: 35)
+                }
                 Spacer()
-            }
-            HStack{
-                Spacer()
-                    .frame(width: 10)
-                Text(vrty)
-                    .font(.title2)
-                    .fontWeight(.thin)
-                    .italic()
-                Spacer()
-            }
-            HStack{
-                Spacer()
-                    .frame(width: 10)
-                Text(comp)
-                    .font(.subheadline)
-                    .fontWeight(.ultraLight)
-                Spacer()
-            }
-            Spacer()
-            
-        }.onAppear {
-            self.recognizedText = ""
-            self.recognizeText(image: self.ui_image)
-            let jsonString = String(cString: parseData(self.recognizedText, self.supplier))
-            deallocateJsonString(jsonStringPointer)
-            do {
-                let data = jsonString.data(using: .utf8)!
-                self.seed_packet = try JSONDecoder().decode(SeedPacket.self, from: data)
-            } catch {
-                print("Error decoding JSON: \(error)")
-                // show an error message to the user
+                    .frame(height: 15)
+            }.onAppear {
+                self.recognizedText = ""
+                self.recognizeText(image: self.ui_image)
+                let jsonString = String(cString: parseData(self.recognizedText, self.supplier))
+                deallocateJsonString(jsonStringPointer)
+                do {
+                    let data = jsonString.data(using: .utf8)!
+                    self.seed_packet = try JSONDecoder().decode(SeedPacket.self, from: data)
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                    // show an error message to the user
+                }
             }
         }
     }
@@ -274,5 +299,3 @@ struct seedPacketInfo: View{
     }
 
 }
-
-

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E3740E72973649500B3F662 /* Troubleshoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3740E62973649500B3F662 /* Troubleshoot.swift */; };
 		5E40E724296633AF00B4EB6E /* SeedvestigateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E40E723296633AF00B4EB6E /* SeedvestigateApp.swift */; };
 		5E40E726296633AF00B4EB6E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E40E725296633AF00B4EB6E /* ContentView.swift */; };
 		5E40E728296633B200B4EB6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E40E727296633B200B4EB6E /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		5E1E3BA2296767ED0061EFBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E3740E62973649500B3F662 /* Troubleshoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Troubleshoot.swift; sourceTree = "<group>"; };
 		5E40E720296633AF00B4EB6E /* Seedvestigate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seedvestigate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E40E723296633AF00B4EB6E /* SeedvestigateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedvestigateApp.swift; sourceTree = "<group>"; };
 		5E40E725296633AF00B4EB6E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				5EE5969A29667B93009A0803 /* SeedLookup.swift */,
 				5E40E725296633AF00B4EB6E /* ContentView.swift */,
 				5E40E723296633AF00B4EB6E /* SeedvestigateApp.swift */,
+				5E3740E62973649500B3F662 /* Troubleshoot.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E3740E72973649500B3F662 /* Troubleshoot.swift in Sources */,
 				5EE49129297299A6007841A7 /* utilities.cpp in Sources */,
 				5E40E726296633AF00B4EB6E /* ContentView.swift in Sources */,
 				5E991EB2296A569300B77EAB /* seed_info.cpp in Sources */,

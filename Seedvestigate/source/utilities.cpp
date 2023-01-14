@@ -55,7 +55,7 @@ vector<string> plants_list() {
         "Fennel", "Flowers", "Garlic", "Gourds", "Grains", "Herbs", "Kale", "Kohlrabi", "Leafy Greens",
         "Lettuce", "Melons", "Microgreens", "Mustard Greens", "Okra", "Onion", "Peas", "Peppers", "Pumpkins",
         "Radish", "Rhubarb", "Root Vegetables", "Spinach", "Squash", "Strawberry", "Sunflower", "Swiss Chard",
-        "Tomatillo","Tomatoes", "Turnips", "Unique Greens", "Watermelon", "Zucchini"
+        "Tomatillo","Tomatoes", "Turnips", "Unique Greens", "Watermelon", "Zucchini", "Bok Choy"
       };
     return list_;
 }
