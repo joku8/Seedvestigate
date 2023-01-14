@@ -187,14 +187,58 @@ struct seedPacketInfo: View{
     @Binding var supplier: String
     
     @State var recognizedText: String = ""
+    @State var jsonString: String = ""
     
+    @State var jsonStringPointer: UnsafePointer<CChar>?
+    
+    struct SeedPacket: Codable {
+        let company: String
+        let plant: String
+        let variety: String
+    }
+    
+    @State var seed_packet: SeedPacket?
+
 
     var body: some View{
         VStack{
-            Text(recognizedText)
+            let comp = seed_packet?.company ?? ""
+            let plnt = seed_packet?.plant ?? ""
+            let vrty = seed_packet?.variety ?? ""
+            HStack{
+                Spacer()
+                    .frame(width: 10)
+                Text(plnt)
+                    .font(.largeTitle)
+                    .fontWeight(.thin)
+                Text(vrty)
+                    .font(.title)
+                    .fontWeight(.light)
+                    .italic()
+                Spacer()
+            }
+            HStack{
+                Spacer()
+                    .frame(width: 10)
+                Text(comp)
+                    .font(.title2)
+                    .fontWeight(.ultraLight)
+                Spacer()
+            }
+            Spacer()
+            
         }.onAppear {
             self.recognizedText = ""
             self.recognizeText(image: self.ui_image)
+            let jsonString = String(cString: parseData(self.recognizedText, self.supplier))
+            deallocateJsonString(jsonStringPointer)
+            do {
+                let data = jsonString.data(using: .utf8)!
+                self.seed_packet = try JSONDecoder().decode(SeedPacket.self, from: data)
+            } catch {
+                print("Error decoding JSON: \(error)")
+                // show an error message to the user
+            }
         }
     }
     

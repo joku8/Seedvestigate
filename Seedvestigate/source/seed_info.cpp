@@ -20,13 +20,22 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-string seedPacketToJson(seedpacket packet) {
+typedef struct seed_packet {
+    std::string company;
+    std::string plant;
+    std::string variety;
+    seed_packet() : company("None"), plant("None"), variety("None") {}
+} seed_packet;
+
+const char* seedPacketToJson(seed_packet packet) {
     std::string json_str = "{";
-    json_str += "\"company\":\"" + std::string(packet.company) + "\",";
-    json_str += "\"plant\":\"" + std::string(packet.plant) + "\",";
-    json_str += "\"variety\":\"" + std::string(packet.variety) + "\"";
+    json_str += "\"company\":\"" + packet.company + "\",";
+    json_str += "\"plant\":\"" + packet.plant + "\",";
+    json_str += "\"variety\":\"" + packet.variety + "\"";
     json_str += "}";
-    return json_str;
+    char* buffer = new char[json_str.size() + 1];
+    strcpy(buffer, json_str.c_str());
+    return buffer;
 }
 
 vector<string> plants_list() {
@@ -68,6 +77,7 @@ int levenshteinDistance(std::string str1, std::string str2) {
   return d[m][n];
 }
 
+// Calculates the closest match of a string to elements of a string vector using levenshtein distance
 string closest_match(string target, vector<string> options) {
     int minDistance = INT_MAX;
     std::string closestMatch;
@@ -82,35 +92,44 @@ string closest_match(string target, vector<string> options) {
     return closestMatch;
 }
 
-seedpacket parseData(const char* data, const char* supplier) {
+const char* parseData(const char* data, const char* supplier) {
     
     cout << "supplier is " << supplier << endl;
         
     if (strcmp(supplier, "Baker Creek Heirloom Seeds")) {
-        
-        
-        
-    } else if (strcmp(supplier, "MIgardener")) {
-        
-        
-        
-    }
-        
-    seedpacket default_ = {"--", "--", "--"};
 
-    return default_;
+        return bakerCreek(data);
+
+    }
+    
+    if (strcmp(supplier, "MIgardener")) {
+
+        return migardener(data);
+
+    }
+    
+    seed_packet default_ = seed_packet();
+
+    return seedPacketToJson(default_);
 }
 
-//seedpacket* baker_creek_seeds(const char* data) {
-//    
-//    printf("Processing seed packet as Baker Creek");
-//    
-//    return seedpacket;
-//}
-//
-//seedpacket* migardener_seeds(const char* data) {
-//    
-//    printf("Processing seed packet as MIgardener");
-//    
-//    return seedpacket;
-//}
+const char* bakerCreek(const char* data) {
+    seed_packet bc = seed_packet();
+    
+    
+    
+    return seedPacketToJson(bc);
+}
+
+const char* migardener(const char* data) {
+    seed_packet mi = seed_packet();
+    
+    
+    
+    return seedPacketToJson(mi);
+}
+
+void deallocateJsonString(const char* json) {
+    cout << "DEALLOCATING" << endl;
+    delete[] json;
+}

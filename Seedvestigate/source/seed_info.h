@@ -10,18 +10,15 @@ extern "C"
 {
 #endif
 
-typedef struct {
-    const char* company;
-    const char* plant;
-    const char* variety;
-} seedpacket;
+const char* parseData(const char* data, const char* supplier);
 
-seedpacket parseData(const char* data, const char* supplier);
+void deallocateJsonString(const char* json);
 
-//seedpacket* baker_creek_seeds(const char* data);
-//seedpacket* migardener_seeds(const char* data);
+// Case-by-case seed companies
+// Look at the seed packet format to determine
 
-void destroy(seedpacket* packet);
+const char* bakerCreek(const char* data);
+const char* migardener(const char* data);
 
 #ifdef __cplusplus
 }
