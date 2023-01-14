@@ -210,10 +210,15 @@ struct seedPacketInfo: View{
                     .frame(width: 10)
                 Text(plnt)
                     .font(.largeTitle)
-                    .fontWeight(.thin)
+                    .fontWeight(.semibold)
+                Spacer()
+            }
+            HStack{
+                Spacer()
+                    .frame(width: 10)
                 Text(vrty)
-                    .font(.title)
-                    .fontWeight(.light)
+                    .font(.title2)
+                    .fontWeight(.thin)
                     .italic()
                 Spacer()
             }
@@ -221,7 +226,7 @@ struct seedPacketInfo: View{
                 Spacer()
                     .frame(width: 10)
                 Text(comp)
-                    .font(.title2)
+                    .font(.subheadline)
                     .fontWeight(.ultraLight)
                 Spacer()
             }
@@ -257,7 +262,7 @@ struct seedPacketInfo: View{
             }
             let text = observations.compactMap({
                 $0.topCandidates(1).first?.string
-            }).joined(separator: ", ")
+            }).joined(separator: ",")
             self.recognizedText = text
         }
         // Process request

@@ -6,6 +6,7 @@
 //
 
 #include "seed_info.h"
+#include "utilities.hpp"
 
 #include <stdio.h>
 #include <iostream>
@@ -20,89 +21,21 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-typedef struct seed_packet {
-    std::string company;
-    std::string plant;
-    std::string variety;
-    seed_packet() : company("None"), plant("None"), variety("None") {}
-} seed_packet;
 
-const char* seedPacketToJson(seed_packet packet) {
-    std::string json_str = "{";
-    json_str += "\"company\":\"" + packet.company + "\",";
-    json_str += "\"plant\":\"" + packet.plant + "\",";
-    json_str += "\"variety\":\"" + packet.variety + "\"";
-    json_str += "}";
-    char* buffer = new char[json_str.size() + 1];
-    strcpy(buffer, json_str.c_str());
-    return buffer;
-}
-
-vector<string> plants_list() {
-    vector<string> list_ = {
-        "Artichoke", "Asparagus", "Basil", "Beans", "Beets", "Broccoli", "Brussel Sprout", "Cabbage",
-        "Carrots", "Cauliflower", "Celery", "Corn", "Cover Crop", "Cucumber", "Edible Flowers", "Eggplant",
-        "Fennel", "Flowers", "Garlic", "Gourds", "Grains", "Herbs", "Kale", "Kohlrabi", "Leafy Greens",
-        "Lettuce", "Melons", "Microgreens", "Mustard Greens", "Okra", "Onion", "Peas", "Peppers", "Pumpkins",
-        "Radish", "Rhubarb", "Root Vegetables", "Spinach", "Squash", "Strawberry", "Sunflower", "Swiss Chard",
-        "Tomatillo","Tomatoes", "Turnips", "Unique Greens", "Watermelon", "Zucchini"
-      };
-    return list_;
-}
-
-// Function to calculate the minimum of three values
-int minimum(int a, int b, int c) {
-  return std::min(std::min(a, b), c);
-}
-
-// Function to calculate the Levenshtein distance between two strings
-int levenshteinDistance(std::string str1, std::string str2) {
-  unsigned long m = str1.length();
-  unsigned long n = str2.length();
-  std::vector<std::vector<int>> d(m + 1, std::vector<int>(n + 1));
-
-  for (int i = 0; i <= m; i++)
-    d[i][0] = i;
-  for (int j = 0; j <= n; j++)
-    d[0][j] = j;
-
-  for (int j = 1; j <= n; j++) {
-    for (int i = 1; i <= m; i++) {
-      if (str1[i - 1] == str2[j - 1])
-        d[i][j] = d[i - 1][j - 1];
-      else
-        d[i][j] = minimum(d[i - 1][j], d[i][j - 1], d[i - 1][j - 1]) + 1;
-    }
-  }
-  return d[m][n];
-}
-
-// Calculates the closest match of a string to elements of a string vector using levenshtein distance
-string closest_match(string target, vector<string> options) {
-    int minDistance = INT_MAX;
-    std::string closestMatch;
-    for (const auto &s : options) {
-        int distance = levenshteinDistance(target, s);
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestMatch = s;
-        }
-    }
-    std::cout << "The closest match is: " << closestMatch << '\n';
-    return closestMatch;
-}
 
 const char* parseData(const char* data, const char* supplier) {
     
     cout << "supplier is " << supplier << endl;
+    
+    string supplier_(supplier);
         
-    if (strcmp(supplier, "Baker Creek Heirloom Seeds")) {
+    if (supplier_ == "Baker Creek Heirloom Seeds") {
 
         return bakerCreek(data);
 
     }
     
-    if (strcmp(supplier, "MIgardener")) {
+    if (supplier_ == "MIgardener") {
 
         return migardener(data);
 
@@ -114,15 +47,31 @@ const char* parseData(const char* data, const char* supplier) {
 }
 
 const char* bakerCreek(const char* data) {
+    cout << "Process this as Baker Creek Seed Packet Data: \n" << data << endl;
     seed_packet bc = seed_packet();
+    bc.company = "Baker Creek Heirloom Seeds";
     
+    string string_data(data);
     
+    std::vector<std::string> text_areas;
+    std::size_t pos = 0, found;
+    while ((found = string_data.find(",", pos)) != std::string::npos) {
+        text_areas.push_back(string_data.substr(pos, found - pos));
+        pos = found + 1;
+    }
+    text_areas.push_back(string_data.substr(pos));
+    
+    bc.plant = closest_match(text_areas[0], plants_list());
+    
+    bc.variety = capitalize(text_areas[1]);
     
     return seedPacketToJson(bc);
 }
 
 const char* migardener(const char* data) {
+    cout << "Process this as MIgardener Seed Packet Data: \n" << data << endl;
     seed_packet mi = seed_packet();
+    mi.company = "MIgardener";
     
     
     
