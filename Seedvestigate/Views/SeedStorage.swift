@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+/**
+ This page shows all the saved seed packets and allows the user to delete, manually add, or redirect to scan seed packet page
+ */
+
+//IMPLEMENT THIS
+
 struct SeedStorage: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)

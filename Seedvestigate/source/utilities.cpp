@@ -20,6 +20,10 @@
 using namespace std;
 namespace fs = std::filesystem;
 
+/**
+ Capitalizes the first word of each word in a string (space delimited)
+ @param s the reference to the string to capitalize
+ */
 std::string capitalize(std::string& s) {
     bool is_start_of_word = true;
     for (int i = 0; i < s.length(); i++) {
@@ -37,6 +41,12 @@ std::string capitalize(std::string& s) {
     return s;
 }
 
+/**
+ Converts a seed packet struct to json string
+ @param packet the seed packet struct to jsonify
+ 
+ @return a pointer to the jsonified seed packet
+ */
 const char* seedPacketToJson(seed_packet packet) {
     std::string json_str = "{";
     json_str += "\"company\":\"" + packet.company + "\",";
@@ -48,8 +58,11 @@ const char* seedPacketToJson(seed_packet packet) {
     return buffer;
 }
 
+/**
+ @return A vector containing possible plants that the seed packet could contain seeds for
+ */
 vector<string> plants_list() {
-    vector<string> list_ = {
+    return {
         "Artichoke", "Asparagus", "Basil", "Beans", "Beets", "Broccoli", "Brussel Sprout", "Cabbage",
         "Carrots", "Cauliflower", "Celery", "Corn", "Cover Crop", "Cucumber", "Edible Flowers", "Eggplant",
         "Fennel", "Flowers", "Garlic", "Gourds", "Grains", "Herbs", "Kale", "Kohlrabi", "Leafy Greens",
@@ -57,15 +70,26 @@ vector<string> plants_list() {
         "Radish", "Rhubarb", "Root Vegetables", "Spinach", "Squash", "Strawberry", "Sunflower", "Swiss Chard",
         "Tomatillo","Tomatoes", "Turnips", "Unique Greens", "Watermelon", "Zucchini", "Bok Choy"
       };
-    return list_;
+//    return list_;
 }
 
-// Function to calculate the minimum of three values
+/**
+ Function to calculate the minimum of three integers
+ @param a an integer
+ @param b an integer
+ @param c an integer
+ */
 int minimum(int a, int b, int c) {
   return std::min(std::min(a, b), c);
 }
 
-// Function to calculate the Levenshtein distance between two strings
+/**
+ Function to calculate the Levenshtein distance between two strings
+ @param str1 The first comparison string
+ @param str2 The second comparison string
+ 
+ @return an integer representing the Levenshtein distance between the two input strings. In other words, this integer represents the minimum number of single-character edits (insertions, deletions or substitutions) required to change the first string into the second.
+ */
 int levenshteinDistance(std::string str1, std::string str2) {
   unsigned long m = str1.length();
   unsigned long n = str2.length();
@@ -87,7 +111,13 @@ int levenshteinDistance(std::string str1, std::string str2) {
   return d[m][n];
 }
 
-// Calculates the closest match of a string to elements of a string vector using levenshtein distance
+/**
+ Calculates the closest match of a string to elements of a string vector using levenshtein distance
+ @param target the string to find a closest match for
+ @param options a vector of strings to choose the closest match from
+ 
+ @return The closest string match for the target found in options
+ */
 string closest_match(string target, vector<string> options) {
     int minDistance = INT_MAX;
     std::string closestMatch;
