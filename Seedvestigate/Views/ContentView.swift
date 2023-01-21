@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showViewController = false
+    
     var body: some View {
         NavigationView{
             VStack {

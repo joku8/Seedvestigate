@@ -8,6 +8,10 @@ Seedvestigate is a simple iOS app that allows users to take a picture of a seed 
 * Select the seed supplier of the packet from a list
 * Save seed packets for future reference
 
+
+## Dependencies
+* MongoDB
+* Alamofire
 ## Requirements
 * iOS 14 or later
 * Xcode 12 or later
