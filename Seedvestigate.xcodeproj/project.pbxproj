@@ -13,7 +13,6 @@
 		5E40E728296633B200B4EB6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E40E727296633B200B4EB6E /* Assets.xcassets */; };
 		5E40E72B296633B200B4EB6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E40E72A296633B200B4EB6E /* Preview Assets.xcassets */; };
 		5E4F0328297B4F13002B88B2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5E4F0327297B4F13002B88B2 /* Alamofire */; };
-		5E4F032A297B4F28002B88B2 /* APIfunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4F0329297B4F28002B88B2 /* APIfunctions.swift */; };
 		5E991EB2296A569300B77EAB /* seed_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E991EB0296A569300B77EAB /* seed_info.cpp */; };
 		5EE49129297299A6007841A7 /* utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EE49127297299A6007841A7 /* utilities.cpp */; };
 		5EE5969B29667B93009A0803 /* SeedLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE5969A29667B93009A0803 /* SeedLookup.swift */; };
@@ -28,7 +27,6 @@
 		5E40E725296633AF00B4EB6E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5E40E727296633B200B4EB6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E40E72A296633B200B4EB6E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		5E4F0329297B4F28002B88B2 /* APIfunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIfunctions.swift; sourceTree = "<group>"; };
 		5E991EAF296A569300B77EAB /* Seedvestigate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Seedvestigate-Bridging-Header.h"; sourceTree = "<group>"; };
 		5E991EB0296A569300B77EAB /* seed_info.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = seed_info.cpp; sourceTree = "<group>"; };
 		5E991EB1296A569300B77EAB /* seed_info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = seed_info.h; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 				5E40E725296633AF00B4EB6E /* ContentView.swift */,
 				5E40E723296633AF00B4EB6E /* SeedvestigateApp.swift */,
 				5E3740E62973649500B3F662 /* Troubleshoot.swift */,
-				5E4F0329297B4F28002B88B2 /* APIfunctions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -196,7 +193,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E4F032A297B4F28002B88B2 /* APIfunctions.swift in Sources */,
 				5E3740E72973649500B3F662 /* Troubleshoot.swift in Sources */,
 				5EE49129297299A6007841A7 /* utilities.cpp in Sources */,
 				5E40E726296633AF00B4EB6E /* ContentView.swift in Sources */,

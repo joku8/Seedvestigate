@@ -1,3 +1,7 @@
+SERVER_ADDRESS = '127.0.0.1'
+// SERVER_ADDRESS = '10.0.2.105'
+
+const { json } = require('express');
 const express = require('express');
 // const { MongoParseError, ReturnDocument } = require('mongodb');
 const mongoose = require('mongoose');
@@ -25,13 +29,14 @@ app.post("/create", (req, res) => {
     var packet = new Data({
         plant: req.query.plant,
         variety: req.query.variety,
-        source: req.query.source
+        source: req.query.source,
+        notes: req.query.notes
     })    
 
     // console.log('Packet saved: ' + packet.plant + ' ' + packet.variety + ' ' + packet.source);
 
     // Check for duplicate packets
-    Data.find({plant: packet.plant, variety: packet.variety, source: packet.source}).then((DBitems) => {
+    Data.find({plant: packet.plant, variety: packet.variety, source: packet.source, notes: packet.notes}).then((DBitems) => {
         if (DBitems.length > 0) {
             console.log('Duplicate packet');
             res.send('Duplicate packet');
@@ -47,24 +52,24 @@ app.post("/create", (req, res) => {
     })
 })
 
-// http://127.0.0.1/create
-var server = app.listen(8081, "127.0.0.1", () => {
-    console.log('Server running at http://127.0.0.1:8081/')
+// CREATE
+var server = app.listen(8081, SERVER_ADDRESS, () => {
+    console.log('Server running at http://' + SERVER_ADDRESS + ':8081');
 })
 
 // FETCH 
 // GET request
-// http://127.0.0.1:8081/fetch
 app.get('/fetch', (req, res) => {
     console.log('Fetching packets');
     Data.find({}).then((DBitems) => {
+        // console.log(JSON.stringify(DBitems));
+        // res.setHeader('Content-Type', 'application/json');
         res.send(DBitems);
     })
 })
 
 // DELETE A PACKET
 // POST request
-// http://127.0.0.1:8081/delete
 app.post('/delete', (req, res) => {
     console.log('Deleting packet');
     Data.findOneAndRemove({
@@ -80,7 +85,6 @@ app.post('/delete', (req, res) => {
 
 // UPDATE A PACKET
 // POST request
-// http://127.0.0.1:8081/update
 app.post('/update', (req, res) => {
     console.log('Updating packet');
     Data.findOneAndUpdate({
@@ -88,7 +92,8 @@ app.post('/update', (req, res) => {
     },{
         plant: req.query.plant,
         variety: req.query.variety,
-        source: req.query.source
+        source: req.query.source,
+        notes: req.query.notes
     }, (err) => {
         console.log("FAILED: " + err);
     })
@@ -97,7 +102,6 @@ app.post('/update', (req, res) => {
 
 // CLEAR ALL PACKETS
 // POST request
-// http://127.0.0.1:8081/clear
 app.post('/clear', (req, res) => {
     console.log('Deleting all packets');
     Data.deleteMany({}, (err) => {

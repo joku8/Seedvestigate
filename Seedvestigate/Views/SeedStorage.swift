@@ -10,99 +10,126 @@
  */
 
 import SwiftUI
-import UIKit
 
-//
-//protocol DataDelegate {
-//    func updateArray(newArray:String)
-//}
-//
-//class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-//
-//    var packet_array = [Packet]()
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return packet_array.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "prototypeCell", for: indexPath)
-//        return cell
-//    }
-//
-//    @IBOutlet weak var packetTableView: UITableView!
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        APIfunctions.functions.delegate = self
-//        APIfunctions.functions.fetchPackets()
-//        print(packet_array)
-//        packetTableView.delegate = self
-//        packetTableView.dataSource = self
-//    }
-//
-//}
-//
-//extension ViewController: DataDelegate {
-//
-//    func updateArray(newArray: String) {
-//        do {
-//            packet_array = try JSONDecoder().decode([Packet].self, from: newArray.data(using: .utf8)!)
-//        } catch {
-//            print("FAILED TO DECODE")
-//        }
-//    }
-//}
+struct Packet: Decodable {
+    var plant: String
+    var variety: String
+    var source: String
+    var _id: String
+    var notes: String
+}
 
+class ViewModel: ObservableObject {
+    
+    @Published var packets: [Packet] = []
 
-//struct MyViewController: UIViewControllerRepresentable {
-//
-//    func makeUIViewController(context: UIViewControllerRepresentableContext<MyViewController>) -> UIViewController {
-//        let vc = ViewController()
-//        vc.modalPresentationStyle = .fullScreen
-//        return vc
-//    }
-//
-//    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<MyViewController>) {
-//    }
-//}
+    func fetch() {
+        guard let url = URL(string: "http://127.0.0.1:8081/fetch") else {
+            return
+            
+        }
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            // Convert to JSON
+            do {
+                
+                let packets = try JSONDecoder().decode([Packet].self, from: data)
+                DispatchQueue.main.async {
+                    self?.packets = packets
+                }
+                
+            } catch {
+                
+                print("FAILED")
+                print(error)
+                
+            }
+            
+        }
+        task.resume()
+        
+    }
+
+}
 
 struct SeedStorage: View {
-    @State private var packets: [Packet] = []
-
+    @ObservedObject var viewModel = ViewModel()
+    
+//    @ObservedObject var packetModel = ViewModel()
+    
+    @State var selectedPacket: Packet? = nil
+    
     var body: some View {
-        VStack {
-            if packets.isEmpty {
-                ProgressView()
-            } else {
-                ForEach(packets, id: \._id) { packet in
-                    VStack {
-                        Text(packet.plant)
-                        Text(packet.variety)
+        
+        NavigationView{
+            VStack {
+                Spacer()
+                    .frame(height: 15)
+                HStack {
+                    Spacer()
+                        .frame(width: 25)
+                    Text("Seed Packets")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.black)
+                    Spacer()
+                    NavigationLink(destination: PacketInfo(packet: $selectedPacket)) {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 20, height: 20)
+                    }
+                    Spacer()
+                        .frame(width: 25)
+                    
+                    
+                }
+                List {
+                    ForEach(viewModel.packets, id: \._id) { packet in
+                        NavigationLink(destination: PacketInfo(packet: $selectedPacket)) {
+                            HStack {
+                                Text(packet.plant).bold()
+                                Text(packet.variety)
+                            }.onTapGesture {
+                                self.selectedPacket = packet
+                            }
+                        }
                     }
                 }
+//                .navigationTitle("Seed Packets")
+                .onAppear {
+                    self.viewModel.fetch()
+                }
             }
-        }.onAppear(perform: {
-            print("About to call fetch function")
-            fetchPackets()
-            print(packets)
-            print("Generating view")
-        })
+        }
+        
     }
     
-    func fetchPackets() {
-        print("Fetching packets in view")
-        APIfunctions.functions.delegate = self
-        APIfunctions.functions.fetchPackets()
-    }
-    
-    func updateArray(newArray: [Packet]) {
-        packets = newArray
-    }
 }
 
 struct SeedStorage_Previews: PreviewProvider {
     static var previews: some View {
         SeedStorage()
+    }
+}
+
+struct PacketInfo: View {
+    @ObservedObject var viewModel: ViewModel = ViewModel()
+
+    var packet: Binding<Packet?>
+
+    var body: some View {
+        Group {
+            if packet.wrappedValue != nil {
+                Text("\(packet.wrappedValue!.plant) \(packet.wrappedValue!.variety)")
+                .navigationBarTitle("Edit Packet", displayMode: .inline)
+            } else {
+                Text("No packet selected")
+                .navigationBarTitle("New Packet", displayMode: .inline)
+            }
+        }
     }
 }
