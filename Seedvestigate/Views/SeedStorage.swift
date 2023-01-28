@@ -64,49 +64,49 @@ struct SeedStorage: View {
     
     var body: some View {
         
-        NavigationView{
-            VStack {
+        VStack {
+            Spacer()
+                .frame(height: 15)
+            HStack {
                 Spacer()
-                    .frame(height: 15)
-                HStack {
-                    Spacer()
-                        .frame(width: 25)
-                    Text("Seed Packets")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.black)
-                    Spacer()
-                    NavigationLink(destination: PacketInfo(packet: $selectedPacket)) {
-                        Image(systemName: "plus")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 20, height: 20)
-                    }
-                    Spacer()
-                        .frame(width: 25)
-                    
-                    
+                    .frame(width: 25)
+                Text("Seed Packets")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.black)
+                Spacer()
+                NavigationLink(destination: PacketInfo(packet: nil)) {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 20, height: 20)
                 }
-                List {
-                    ForEach(viewModel.packets, id: \._id) { packet in
-                        NavigationLink(destination: PacketInfo(packet: $selectedPacket)) {
-                            HStack {
-                                Text(packet.plant).bold()
-                                Text(packet.variety)
-                            }.onTapGesture {
-                                self.selectedPacket = packet
-                            }
+                Spacer()
+                    .frame(width: 25)
+                
+                
+            }
+            List {
+                ForEach(viewModel.packets, id: \._id) { packet in
+                    NavigationLink(destination: PacketInfo(packet: packet)) {
+                        HStack {
+                            Text(packet.plant).bold()
+                            Text(packet.variety)
                         }
+//                            .onTapGesture {
+//                                self.selectedPacket = packet
+//                                print(selectedPacket?.plant)
+//                            }
                     }
-                }
-//                .navigationTitle("Seed Packets")
-                .onAppear {
-                    self.viewModel.fetch()
                 }
             }
+//                .navigationTitle("Seed Packets")
+            .onAppear {
+                self.viewModel.fetch()
+            }
         }
-        
     }
+        
     
 }
 
@@ -119,17 +119,17 @@ struct SeedStorage_Previews: PreviewProvider {
 struct PacketInfo: View {
     @ObservedObject var viewModel: ViewModel = ViewModel()
 
-    var packet: Binding<Packet?>
+    @State var packet: Packet?
+    
+//    var packet: Binding<Packet?>
 
     var body: some View {
-        Group {
-            if packet.wrappedValue != nil {
-                Text("\(packet.wrappedValue!.plant) \(packet.wrappedValue!.variety)")
-                .navigationBarTitle("Edit Packet", displayMode: .inline)
-            } else {
-                Text("No packet selected")
-                .navigationBarTitle("New Packet", displayMode: .inline)
-            }
+        if packet == nil {
+            Text("New Packet")
+            Text("None here")
+        } else {
+            Text("Edit Packet")
+            Text(packet!.plant)
         }
     }
 }
